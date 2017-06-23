@@ -1,5 +1,6 @@
 This is a spring boot based restful web services application created for sis test
 
+To Run The application:
 To run the application using an IDE: right click on the application and choose run as java application
  From command line it can be run using the command: mvn boot:run
  
