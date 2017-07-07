@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/teams", produces = "application/json", consumes = "application/json")
-@Api(value="onlinestore", description="Operations pertaining to teams")
+@Api(value="teams", description="Operations pertaining to teams")
 public class TeamController {
 
     private final TeamService service;
