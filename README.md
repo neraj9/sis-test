@@ -15,3 +15,10 @@ To access the application from a browser:
 
  http://localhost:8106/sis-test/teams
  http://localhost:8106/sis-test/teams/chelsea
+
+
+ Swagger based api documentation is available at:
+ http://localhost:8106/sis-test/v2/api-docs
+
+ Swagger UI available at:
+ http://localhost:8106/sis-test/swagger-ui.html

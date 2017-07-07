@@ -12,7 +12,7 @@ public class Application {
     public static void main(String[] args) {
     	LOG.info("Running app");
         SpringApplication.run(Application.class, args);
-    	LOG.info("Finished invoking run application");
+    	LOG.info("Finished invoking run application ");
 
     }
 }

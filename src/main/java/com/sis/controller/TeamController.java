@@ -1,40 +1,45 @@
 package com.sis.controller;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.SortedSet;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.sis.common.exception.AlreadyExistsException;
 import com.sis.common.exception.NotFoundException;
 import com.sis.model.Team;
 import com.sis.service.TeamService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
 
 
 @RestController
-@RequestMapping("/teams")
+@RequestMapping(value = "/teams", produces = "application/json", consumes = "application/json")
+@Api(value="onlinestore", description="Operations pertaining to teams")
 public class TeamController {
 
     private final TeamService service;
     
 	private static final Logger LOG = LoggerFactory.getLogger(TeamController.class);
 
-
     public TeamController(TeamService service) {
         this.service = service;
     }
 
+    @ApiOperation(value = "View a list of available teams", response = Iterable.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+    }
+    )
     @RequestMapping(method=RequestMethod.GET)
     @ResponseStatus( HttpStatus.OK )
     public ResponseEntity<List<Team>> getAllTeams() {
