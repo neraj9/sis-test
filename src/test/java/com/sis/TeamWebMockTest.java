@@ -2,6 +2,7 @@ package com.sis;
 
 import com.sis.controller.TeamController;
 import com.sis.model.Team;
+import com.sis.repository.TeamRepository;
 import com.sis.service.TeamService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,10 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -36,6 +35,9 @@ public class TeamWebMockTest {
 
     @MockBean
     private TeamService service;
+
+    @MockBean
+    private TeamRepository repo;
 
     @Test
     public void getTeamsShouldReturnTeamsFromService() throws Exception {
