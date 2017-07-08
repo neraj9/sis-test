@@ -17,18 +17,18 @@ public class TeamServiceImpl implements TeamService{
 	private static final Logger LOG = LoggerFactory.getLogger(TeamServiceImpl.class);
 
 
-	private TeamRepository teamRepository;
+	private TeamRepository teamRepositoryOld;
 	
 	
-	public TeamServiceImpl(TeamRepository teamRepository){
-		this.teamRepository = teamRepository;
+	public TeamServiceImpl(TeamRepository teamRepositoryOld){
+		this.teamRepositoryOld = teamRepositoryOld;
 	}
 	
 
 		@Override
 		public List<Team> getAllTeams(){
 			LOG.info("In getAllTeams");
-			return teamRepository.getAllTeams();
+			return teamRepositoryOld.findAll();
 		}
 		
 		
@@ -46,7 +46,7 @@ public class TeamServiceImpl implements TeamService{
 		public Team getByTeamName(String teamName){
 			LOG.info("In getByTeamName");
 
-			Team team =  teamRepository.getByTeamName(teamName);
+			Team team =  teamRepositoryOld.findByName(teamName);
 			
 			if(team == null){
 				throw new NotFoundException();
@@ -61,11 +61,11 @@ public class TeamServiceImpl implements TeamService{
 
 			//if team by name is already there throw an exception
 			
-			if(teamRepository.getByTeamName(team.getName()) != null){
+			if(teamRepositoryOld.findByName(team.getName()) != null){
 				//team already exists
 				throw new AlreadyExistsException();
 			}
-			teamRepository.addTeam(team);
+			teamRepositoryOld.save(team);
 		}
 
 	}

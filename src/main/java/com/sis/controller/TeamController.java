@@ -20,7 +20,8 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/teams", produces = "application/json", consumes = "application/json")
+//@RequestMapping(value = "/teams", produces = "application/json", consumes = "application/json")
+@RequestMapping(value = "/teams")
 @Api(value="teams", description="Operations pertaining to teams")
 public class TeamController {
 

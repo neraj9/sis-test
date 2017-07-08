@@ -1,16 +1,14 @@
 package com.sis.repository;
 
+import com.sis.model.Team;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.stereotype.Component;
-
-import com.sis.model.Team;
-
 @Component
-public class StubbedTeamRepository implements TeamRepository {
+public class StubbedTeamRepository implements TeamRepositoryOld {
 	
 	private List<Team> allTeams;
 	

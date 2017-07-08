@@ -1,15 +1,10 @@
 package com.sis.repository;
 
-import java.util.List;
-
 import com.sis.model.Team;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface TeamRepository {
+public interface TeamRepository extends MongoRepository<Team, String>{
 
-	List<Team> getAllTeams();
-
-	Team getByTeamName(String teamName);
-
-	void addTeam(Team team);
+    public Team findByName(String name);
 
 }

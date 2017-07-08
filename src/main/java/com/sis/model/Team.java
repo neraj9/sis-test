@@ -1,7 +1,12 @@
 package com.sis.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.data.annotation.Id;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Team{
-	
+
+	@Id
 	private String name; //assumption team name is unique
 	private String city;
 	private String owner;

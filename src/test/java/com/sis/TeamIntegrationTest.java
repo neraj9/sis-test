@@ -2,25 +2,23 @@ package com.sis;
 
 import com.sis.model.Team;
 import com.sis.repository.TeamRepository;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.LocalServerPort;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-import java.util.SortedSet;
 
 import static java.util.Arrays.asList;
 import static junit.framework.TestCase.assertTrue;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -32,6 +30,30 @@ public class TeamIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @Autowired
+    private TeamRepository teamRepository;
+
+    @Before
+    public void init(){
+        Team chelsea = new Team("Chelsea", "London", "Abramovich", 80000, "Premier League", 18, "13-06-1970");
+        Team manchesterCity = new Team("ManchesterCity", "Manchester", "Qatar Airways", 72000, "Premier League-2015", 21, "13-06-1997");
+
+        Team manUnited = new Team("ManchesterUnited", "Manchester", "ABC", 100000, "Premier League-2013", 18, "23-06-1950");
+
+        teamRepository.save(chelsea);
+        teamRepository.save(manchesterCity);
+        teamRepository.save(manUnited);
+    }
+
+    @After
+    public void destroy(){
+        teamRepository.delete("Chelsea");
+        teamRepository.delete("ManchesterCity");
+        teamRepository.delete("ManchesterUnited");
+    }
+
+
 
     @Test
     public void getTeamsShouldReturnTeams() throws Exception {
@@ -68,7 +90,13 @@ public class TeamIntegrationTest {
     @Test
     public void getTeamShouldReturnCorrectTeam() throws Exception {
 
-        Team returnedTeam = this.restTemplate.getForObject("http://localhost:" + port + "/sis-test/teams/chelsea", Team.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        ResponseEntity<Team> returnedTeamEntity =  restTemplate.exchange("http://localhost:" + port + "/sis-test/teams/Chelsea", HttpMethod.GET, entity, Team.class);
+
+        Team returnedTeam = returnedTeamEntity.getBody();
 
         assertEquals("Chelsea", returnedTeam.getName());
         assertEquals("London", returnedTeam.getCity());
