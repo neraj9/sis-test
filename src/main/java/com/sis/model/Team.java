@@ -2,8 +2,10 @@ package com.sis.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Document(collection="teams")
 public class Team{
 
 	@Id

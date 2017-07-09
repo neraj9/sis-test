@@ -22,3 +22,6 @@ To access the application from a browser:
 
  Swagger UI available at:
  http://localhost:8106/sis-test/swagger-ui.html
+
+
+ For Mongo Examples - look at :  http://source.lishman.com/project/609#card/1113/file/18060
