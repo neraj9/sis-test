@@ -25,3 +25,4 @@ To access the application from a browser:
 
 
  For Mongo Examples - look at :  http://source.lishman.com/project/609#card/1113/file/18060
+ validator from here: https://resourcepool.io/2014/08/21/java-quickies-hibernate-validator-reference-implementation-of-jsr-303/
