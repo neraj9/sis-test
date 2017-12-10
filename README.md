@@ -44,3 +44,6 @@ https://www.typescriptlang.org/docs/handbook/basic-types.html
 
 
 http://spring.io/guides/gs/multi-module/
+
+Neo4J example:
+https://github.com/neo4j-examples/sdn-university/tree/master/src/main/java/school

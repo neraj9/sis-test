@@ -8,6 +8,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -104,6 +106,28 @@ public class JunkTest {
 
 
     }
+
+
+    @Test
+    public void reduceTest(){
+        BinaryOperator<ArrayList<String>> combiner = (x, y) -> { x.addAll(y); return x; };
+        BiFunction<ArrayList<String>, String, ArrayList<String>> accumulator = (x, y) -> {
+            x.add(y);
+            return x;
+        };
+        List<String> list1 = Stream.of("2","c","jj", "KK").reduce(new ArrayList<String>(),
+                accumulator, combiner);
+        //System.out.println(list1);
+
+
+        List<String> list = Arrays.asList("Mukesh", "Vishal", "Mukesh");
+        Set result = list.stream().collect(HashSet<String>::new,
+                (response, element) -> response.add(element),
+                (response1, response2) -> {});
+        System.out.println("Result: " + result);
+    }
+
+
 
     @Test
     public void testGroupBy(){
